@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="Eteindre">Eteindre</button>
+    <button id="AfficherProcessus">Afficher les applications ouvertes</button>
+    <ul id="processList"></ul>
+
+    <script>
+        document.getElementById("Eteindre").addEventListener("click", function() {
+            fetch("http://192.168.0.24:5000/click", {method: "POST"})
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById("AfficherProcessus").addEventListener("click", function() {
+            fetch("http://192.168.0.24:5000/processes")
+                .then(response => response.json())
+                .then(data => {
+                    const processList = document.getElementById("processList");
+                    processList.innerHTML = "";
+                    data.forEach(process => {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = `PID: ${process.pid}, Nom: ${process.name}, Titre: ${process.title}`;
+                        processList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
