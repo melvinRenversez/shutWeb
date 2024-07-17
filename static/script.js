@@ -1,3 +1,5 @@
+ip = "192.168.0.24"
+
 const wir_window = document.getElementById('wir_window');
 const shutdown_window = document.getElementById('shutdown_window');
 const wir_button = document.getElementById('wir');
@@ -58,7 +60,7 @@ function loop() {
         if (Number.isInteger(parseFloat(pid))) {
             console.log(pid);
     
-            fetch(`http://192.168.0.41:5000/get_pid?pid=${pid}`, { method: 'POST' })
+            fetch(`http://${ip}:5000/get_pid?pid=${pid}`, { method: 'POST' })
                 .then(response => {
                     if (response.status === 200) {
                         return response.json();
@@ -104,7 +106,7 @@ setInterval(loop, 1000);
 
 function shutdown(self) {
     self.children[2].style.right = '0';
-    fetch("http://192.168.0.41:5000/shutdown", { method: "POST" })
+    fetch(`http://${ip}:5000/shutdown`, { method: "POST" })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erreur réseau');
@@ -119,7 +121,7 @@ function shutdown(self) {
 }
 
 document.getElementById("wir").addEventListener("click", function() {
-fetch("http://192.168.0.41:5000/wir", { method: "POST" })
+fetch(`http://${ip}:5000/wir`, { method: "POST" })
     .then(response => {
         if (!response.ok) {
             throw new Error('Erreur réseau');
@@ -233,7 +235,7 @@ function copy_PID(self){
 function closeApp(self){
     pid = self.parentElement.children[0].children[1].children[0].value
     console.log(pid);
-    fetch(`http://192.168.0.41:5000/close_app?pid=${pid}`, { method: "POST" })
+    fetch(`http://${ip}:5000/close_app?pid=${pid}`, { method: "POST" })
     .catch(error => console.error('Error:', error));
     taskkill_input.value = "";
     taskkill_name.innerHTML = "";
