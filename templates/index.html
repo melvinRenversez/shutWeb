@@ -3,35 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Contrôle Système</title>
 </head>
 <body>
-    <button id="Eteindre">Eteindre</button>
-    <button id="AfficherProcessus">Afficher les applications ouvertes</button>
-    <ul id="processList"></ul>
-
-    <script>
-        document.getElementById("Eteindre").addEventListener("click", function() {
-            fetch("http://192.168.0.24:5000/click", {method: "POST"})
-                .then(response => response.text())
-                .then(data => console.log(data))
-                .catch(error => console.error('Error:', error));
-        });
-
-        document.getElementById("AfficherProcessus").addEventListener("click", function() {
-            fetch("http://192.168.0.24:5000/processes")
-                .then(response => response.json())
-                .then(data => {
-                    const processList = document.getElementById("processList");
-                    processList.innerHTML = "";
-                    data.forEach(process => {
-                        const listItem = document.createElement("li");
-                        listItem.textContent = `PID: ${process.pid}, Nom: ${process.name}, Titre: ${process.title}`;
-                        processList.appendChild(listItem);
-                    });
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
+    
+    
+    <div id="left">
+        <button id="shutdown">Eteindre</button>
+        <button id="wir">Afficher les applications ouvertes</button>
+        <button id="taskkill">Ferme une applications</button>
+    </div>
+    
+    <div id="right">
+        <div id="wir_window">
+            <ul id="processList"></ul>
+        </div>
+        <div id="shutdown_window">
+            <div class="container">
+                <button class="switch" id="shutdown" onclick="shutdown(this)">
+                    <span>On</span>
+                    <span>Off</span>
+                    <div class="status"></div>
+                </button>
+            </div>
+        </div>
+        <div id="taskkill_window">
+            <div class="container">
+                <div class="content">
+                    <div class="box">
+                        <p>PID</p>
+                        <div class="input-center">
+                            <input type="text" placeholder="pid" type="number" id="taskkill_input">
+                        </div>
+                    </div>
+                    <div class="box">
+                        <p>Nom</p>
+                        <span id="taskkill-name"></span>
+                    </div>
+                    <div class="box">
+                        <p>Titre</p>
+                        <span id="taskkill-title"></span>
+                    </div>
+                    <button id="taskkill_close_app_button" onclick="closeApp(this)">Fermer l'application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
 </body>
 </html>
+<script src="{{ url_for('static', filename='script.js') }}"></script>

@@ -1,0 +1,58 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleTest.css">
+    <title>Contrôle Système</title>
+
+</head>
+
+<body cz-shortcut-listen="true">
+
+
+    <div id="left">
+        <button id="shutdown">Eteindre</button>
+        <button id="wir">Afficher les applications ouvertes</button>
+        <button id="taskkill">Ferme une applications</button>
+    </div>
+
+    <div id="right">
+        <div id="wir_window">
+            <ul id="processList"><li onclick="copy_PID(this)"><div class="nom"><h2>Nom</h2><p>ApplicationFrameHost</p></div><div class="titre"><h2>Titre</h2><p>ParamŠtres</p></div><div class="pid"><h2>PID</h2><p>2364</p></div></li><li><div class="nom"><h2>Nom</h2><p>chrome</p></div><div class="titre"><h2>Titre</h2><p>Contr“le SystŠme - Google Chrome</p></div><div class="pid"><h2>PID</h2><p>20484</p></div></li><li><div class="nom"><h2>Nom</h2><p>Code</p></div><div class="titre"><h2>Titre</h2><p>index.html - shutWeb - Visual Studio Code</p></div><div class="pid"><h2>PID</h2><p>8848</p></div></li><li><div class="nom"><h2>Nom</h2><p>CodeSetup-stable-f1e16e1e6214d7c44d078b1f0607b2388f29d729.tmp</p></div><div class="titre"><h2>Titre</h2><p>Installation</p></div><div class="pid"><h2>PID</h2><p>2536</p></div></li><li><div class="nom"><h2>Nom</h2><p>Notepad</p></div><div class="titre"><h2>Titre</h2><p>index.html - Bloc-notes</p></div><div class="pid"><h2>PID</h2><p>7952</p></div></li><li><div class="nom"><h2>Nom</h2><p>NVIDIA</p></div><div class="titre"><h2>Titre</h2><p>Share                                                  NVIDIA GeForce Overlay</p></div><div class="pid"><h2>PID</h2><p>10720</p></div></li><li><div class="nom"><h2>Nom</h2><p>Spotify</p></div><div class="titre"><h2>Titre</h2><p>Nirvana - Heart-Shaped Box</p></div><div class="pid"><h2>PID</h2><p>11056</p></div></li><li><div class="nom"><h2>Nom</h2><p>SystemSettings</p></div><div class="titre"><h2>Titre</h2><p>ParamŠtres</p></div><div class="pid"><h2>PID</h2><p>4848</p></div></li><li><div class="nom"><h2>Nom</h2><p>TextInputHost</p></div><div class="titre"><h2>Titre</h2><p>Exp‚rience d'entr‚e Windows</p></div><div class="pid"><h2>PID</h2><p>8304</p></div></li></ul>
+        </div>
+        <div id="shutdown_window">
+            <div class="container">
+                <button class="switch" id="shutdown" onclick="shutdown(this)">
+                    <span>On</span>
+                    <span>Off</span>
+                    <div class="status"></div>
+                </button>
+            </div>
+        </div>
+        <div id="taskkill_window">
+            <div class="container">
+                <div class="content">
+                    <div class="box">
+                        <p>PID</p>
+                        <div class="input-center">
+                            <input type="text" placeholder="pid" type="number" id="taskkill_input">
+                        </div>
+                    </div>
+                    <div class="box">
+                        <p>Nom</p>
+                        <span id="taskkill-name"></span>
+                    </div>
+                    <div class="box">
+                        <p>Titre</p>
+                        <span id="taskkill-title"></span>
+                    </div>
+                    <button id="taskkill_close_app_button" onclick="closeApp(this)">Fermer l'application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+<script src="scriptTest.js"></script>
